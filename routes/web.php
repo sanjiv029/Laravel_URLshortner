@@ -19,3 +19,7 @@ Route::get('/urls/edit/{id}',[urlpageController::class,'edit'])->name('urls.edit
 
 //update  the existing url
 Route::post('/urls/edit/{id}',[urlpageController::class,'update']);
+
+
+//delete  the existing url
+Route::post('/urls/delete/{id}',[urlpageController::class,'destroy'])->name('urls.destroy');

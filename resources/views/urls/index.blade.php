@@ -8,19 +8,28 @@
     </a>
     <br>
     <div>
-        <table style="color: rgb(106, 84, 84)">
+        <table  style="color: rgb(0, 0, 0); border: 1px solid rgb(0, 107, 238); border-collapse: collapse; width: 70%; height: auto;">
             <h2>URL Table</h2>
             <tr>
-                <th>ID</th>
-                <th>Original Url</th>
-                <th>Short Url</th>
+                <th style="border: 1px solid black">ID</th>
+                <th style="border: 1px solid black">Original Url</th>
+                <th style="border: 1px solid black">Short Url</th>
+                <th style="border: 1px solid black">Actions</th>
             </tr>
             @foreach ($urls as $url )
                 <tr>
-                    <td>{{$url->id}}</td>
-                    <td>{{$url->original_url}} </td>
-                    <td>{{$url->short_url}} </td>
-                    <td><a href={{route('urls.edit',['id'=>$url->id])}}>Edit</td>
+                    <td style="border: 1px solid black">{{$url->id}}</td>
+                    <td style="border: 1px solid black">{{$url->original_url}} </td>
+                    <td style="border: 1px solid black">{{$url->short_url}} </td>
+                    <td style="border: 1px solid black"><a href={{route('urls.edit',['id'=>$url->id])}}>Edit</td>
+
+                     <td style="border: 1px solid black">
+                        <form action="{{route('urls.destroy',$url->id)}}" method="POST">
+                            @csrf
+                        <button type="delete">Delete</button>
+                        </form>
+                    </td>
+
                 </tr>
             @endforeach
 

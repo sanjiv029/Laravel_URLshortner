@@ -47,4 +47,10 @@ public function update(Request $request, $id){
    );
    return redirect()->action([urlpageController::class,'index']);
 }
+public function destroy($id){
+    $url = URL::findOrFail($id);
+    $url->delete();
+    return redirect()->action([urlpageController::class,'index']);
+
+}
 }
