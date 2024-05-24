@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title> {{Config('app.name')}} </title>
 </head>
-<body>
+<body style="background:linear-gradient(to right ,#fffdfe, #a8c0ff); margin:70px; padding:5px;">
     @yield('content')
 </body>
 </html>

@@ -23,3 +23,9 @@ Route::post('/urls/edit/{id}',[urlpageController::class,'update']);
 
 //delete  the existing url
 Route::post('/urls/delete/{id}',[urlpageController::class,'destroy'])->name('urls.destroy');
+
+//route for short url
+Route::get('/{short_url}',[urlpageController::class,'redirect']);
+
+//view individual urls
+Route::get('/urls/{id}',[ urlpageController::class, 'view'])->name('urls.view');
