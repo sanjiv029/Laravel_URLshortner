@@ -1,3 +1,4 @@
+{{-- @dd(Session::all()) --}}
 @extends('Layouts.App')
 @section('content')
    {{--  listing urls here --}}
@@ -13,25 +14,25 @@
     @endif
     <br>
     <div>
-        <table  style="color: rgb(0, 0, 0); border: 1px solid rgb(0, 107, 238); border-collapse: collapse; width: 70%; height: auto;">
+        <table  style="border: 2px solid rgb(0, 0, 0); border-collapse: collapse; width: 80%; height: 120px;">
             <h2>URL Table</h2>
             <tr>
-                <th style="border: 1px solid black">ID</th>
-                <th style="border: 1px solid black">Original Url</th>
-                <th style="border: 1px solid black">Short Url</th>
-                <th style="border: 1px solid black">Actions</th>
+                <th style="border: 2px solid black">ID</th>
+                <th style="border: 2px solid black">Original Url</th>
+                <th style="border: 2px solid black">Short Url</th>
+                <th style="border: 2px solid black">Actions</th>
             </tr>
             @foreach ($urls as $url )
                 <tr>
-                    <td style="border: 1px solid black">{{$url->id}}</td>
-                    <td style="border: 1px solid black">{{$url->original_url}} </td>
-                    <td style="border: 1px solid black">{{$url->short_url}} </td>
-                    <td style="border: 1px solid black"><a href={{route('urls.edit',['id'=>$url->id])}}>Edit</td>
-                    <td style="border: 1px solid black"><a href={{route('urls.view',['id'=>$url->id])}}>View</td>
-                    <td style="border: 1px solid black">
+                    <td style="border: 2px solid black; text-align:center">{{$url->id}}</td>
+                    <td style="border: 1px solid black ; text-align:center">{{$url->original_url}} </td>
+                    <td style="border: 1px solid black ; text-align:center">{{$url->short_url}} </td>
+                    <td style="border: 1px solid black; text-align:center"><a href={{route('urls.edit',['id'=>$url->id])}}>Edit</td>
+                    <td style="border: 1px solid black; text-align:center"><a href={{route('urls.view',['id'=>$url->id])}}>View</td>
+                    <td style="border: 1px solid black; text-align:center;">
                         <form action="{{route('urls.destroy',$url->id)}}" method="POST">
                             @csrf
-                        <button type="delete">Delete</button>
+                        <button type="delete" style="color:red;">Delete</button>
                         </form>
                     </td>
                 </tr>

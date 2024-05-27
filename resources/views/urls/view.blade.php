@@ -11,20 +11,20 @@
 
     <br>
     <div>
-        <table  style="color: rgb(0, 0, 0); border: 1px solid rgb(0, 107, 238); border-collapse: collapse; width: 70%; height: auto;">
+        <table  style=" border: 2px solid rgb(0, 0, 0); border-collapse: collapse; width: 100%; height: 120px;">
             <h2>URL Table</h2>
             <tr>
-                <th style="border: 1px solid black">ID</th>
-                <th style="border: 1px solid black">IP Address</th>
-                <th style="border: 1px solid black">User Agent</th>
-                <th style="border: 1px solid black">Visited At</th>
+                <th style="border: 2px solid black:">ID</th>
+                <th style="border: 2px solid black">IP Address</th>
+                <th style="border: 2px solid black">User Agent</th>
+                <th style="border: 2px solid black">Visited At</th>
             </tr>
             @foreach ($url->Visitors as $visitor )
                 <tr>
-                    <td style="border: 1px solid black">{{$visitor->id}}</td>
-                    <td style="border: 1px solid black">{{$visitor->ip}} </td>
-                    <td style="border: 1px solid black">{{$visitor->user_agent}} </td>
-                    <td style="border: 1px solid black">{{$visitor->created_at}} </td>
+                    <td style="border: 2px solid black ; text-align:center">{{$visitor->id}}</td>
+                    <td style="border: 1px solid black ; text-align:center">{{$visitor->ip}} </td>
+                    <td style="border: 1px solid black ; text-align:center">{{$visitor->user_agent}} </td>
+                    <td style="border: 1px solid black ; text-align:center; color:green;">{{$visitor->created_at->diffForHumans()}} </td>
 
                 </tr>
             @endforeach

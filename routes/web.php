@@ -1,7 +1,18 @@
 <?php
+
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\homepageController;
 use App\Http\Controllers\urlpageController;
 use Illuminate\Support\Facades\Route;
+
+//authentication route
+Route::get('/register', [authController::class, 'register_page'])->name('auth.register');
+// Route for handling registration form submission
+Route::post('/register', [authController::class, 'register']);
+//Login route
+Route::get('/login', [authController::class, 'login_page'])->name('auth.login');
+// Route for handling login form submission
+Route::post('/login', [authController::class, 'login']);
 
 Route::get('/',[homepageController::class,'index'])->name('home');
 
@@ -29,3 +40,5 @@ Route::get('/{short_url}',[urlpageController::class,'redirect']);
 
 //view individual urls
 Route::get('/urls/{id}',[ urlpageController::class, 'view'])->name('urls.view');
+
+

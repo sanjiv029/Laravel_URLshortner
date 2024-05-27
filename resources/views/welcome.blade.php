@@ -2,6 +2,8 @@
 @section('content')
     <h1 style="text-align: center">Welcome to URL shortner application</h1>
     <a href= {{route('urls') }}>
-        <h3>URLS</h3>
+        <h2 style="text-align: center">URLS</h2>
         </a>
+        <br>
+        <br>
 @endsection

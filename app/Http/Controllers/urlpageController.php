@@ -11,7 +11,9 @@ class urlpageController extends Controller
 {
 public function index(){
     $urls = URL::all();
+    //Auth()->logout();
     return view("urls.index",compact("urls"));
+
 }
 public function view($id){
     $url = URL::findOrFail($id);
