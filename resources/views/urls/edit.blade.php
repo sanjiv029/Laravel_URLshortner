@@ -1,16 +1,17 @@
 @extends('Layouts.App')
 @section('content')
-    Edit your url here.
+    <h2>Edit your url here.</h2>
     <form action={{route('urls.edit',$url->id)}} method="post">
         <br>
         @csrf
-        <label>Input your url: </label>
-        <input type="text" name="url" value={{$url->original_url}} >
+        <label style=" font-size: 20px;">Input your url: </label>
+        <input type="text" name="url" value={{$url->original_url}} style="width:250px">
         @error('url')
             <span style="color:red"> {{$message}} </span>
         @enderror
         <br>
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" class="button">Submit</button>
+         <a href="{{ route('urls') }}" class="button">Back</a>
     </form>
 @endsection

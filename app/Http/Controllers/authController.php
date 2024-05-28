@@ -32,10 +32,10 @@ class authController extends Controller
             'password' => $request->password,
         ]);;
         // Auth::login($user);
-        return redirect()->route('auth.login')->with('success', 'Registration successful!');
+        return redirect()->route('login')->with('success', 'Registration successful!');
     }
 public function login_page(Request $request){
-    return view ('auth.login');
+    return view('auth.login');
 
 }
 public function login(Request $request){
@@ -51,5 +51,9 @@ public function login(Request $request){
    }
 
 //    $this->login($request);
+}
+public function logout(Request $request){
+    auth()->logout();
+    return redirect()->route('home')->with('success','Logged Out Successfully');
 }
 }

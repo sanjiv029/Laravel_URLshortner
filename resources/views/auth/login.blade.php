@@ -2,7 +2,7 @@
 @section('content')
    <div class="container">
     <h1 style="text-align: center">Log In Page</h1>
-    <form method="POST" action="{{route('auth.login')}}">
+    <form method="POST" action="{{route('login')}}">
         @csrf
         <div class="form-group" style="padding-bottom: 20px">
             <label for="email">Email</label>

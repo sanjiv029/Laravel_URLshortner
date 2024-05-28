@@ -24,7 +24,7 @@
                     <td style="border: 2px solid black ; text-align:center">{{$visitor->id}}</td>
                     <td style="border: 1px solid black ; text-align:center">{{$visitor->ip}} </td>
                     <td style="border: 1px solid black ; text-align:center">{{$visitor->user_agent}} </td>
-                    <td style="border: 1px solid black ; text-align:center; color:green;">{{$visitor->created_at->diffForHumans()}} </td>
+                    <td style="border: 1px solid black ; text-align:center; color:rgb(242, 0, 0);">{{$visitor->created_at->diffForHumans()}} </td>
 
                 </tr>
             @endforeach
@@ -32,4 +32,8 @@
 
         </table>
     </div>
+    <footer style="margin-top: 50px">
+        <a href="{{ route('urls') }}" class="button">Back</a>
+    </footer>
+
 @endsection

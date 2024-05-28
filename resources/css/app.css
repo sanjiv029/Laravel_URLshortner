@@ -1,0 +1,49 @@
+body {
+    background: linear-gradient(to right, #3d46f5, #a8c0ff);
+    margin: 70px;
+    padding: 5px;
+}
+
+/* Navigation bar styles */
+.navbar {
+    font-size: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar a {
+    text-decoration: none; /* Remove underline from links */
+    color: inherit; /* Inherit text color */
+    margin: 0 20px; /* Add horizontal margin for spacing */
+}
+
+/* Button styles */
+.transparent-button {
+    background-color: transparent;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    outline: none;
+}
+
+.transparent-button:hover,
+.transparent-button:focus {
+    opacity: 0.8;
+}
+.transparent-button {
+    background-color: transparent; /* Makes the background transparent */
+    border: none; /* Removes the border */
+    color: inherit; /* Ensures the text color inherits from parent element */
+    cursor: pointer; /* Changes the cursor to a pointer to indicate it's clickable */
+    padding: 0; /* Removes any default padding */
+    font: inherit; /* Inherits the font style from the parent element */
+    outline: none; /* Removes the default outline on focus */
+}
+
+.transparent-button:hover,
+.transparent-button:focus {
+    opacity: 0.8; /* Optional: Adds a slight opacity change on hover/focus for better UX */
+}

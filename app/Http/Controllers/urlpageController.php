@@ -10,11 +10,17 @@ use App\Models\Visitor;
 class urlpageController extends Controller
 {
 public function index(){
-    $urls = URL::all();
+    // $urls = URL::all();
     //Auth()->logout();
-    return view("urls.index",compact("urls"));
+     // Ensure the user is authenticated
+        $userID = auth()->user()->id;
+        $urls= URL::where("user_id", $userID)->get();
+        // $user=auth()->user();
+        // $urls=$user->urls;
+        return view('urls.index', compact('urls'));
 
 }
+
 public function view($id){
     $url = URL::findOrFail($id);
     return view("urls.view",compact("url"));
@@ -32,6 +38,7 @@ public function store(Request $request){
     $ran_string = Str::random(8);
     // return $ran_string;
    URL::create([
+    'user_id'=> auth()->user()->id,
     'original_url'=> $request->url,
     'short_url'=> $ran_string
    ]);
