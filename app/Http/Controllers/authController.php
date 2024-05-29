@@ -47,7 +47,7 @@ public function login(Request $request){
 
    if (Auth::attempt($credentials))
    {
-    return redirect()->intended('urls')->with('success', 'Login successful!');
+    return redirect()->route('home')->with('success', 'Login successful!');
    }
 
 //    $this->login($request);

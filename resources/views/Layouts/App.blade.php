@@ -9,6 +9,7 @@
     <style>
         body {
             background: linear-gradient(to right,#aab1ee, #0088ff);
+            /* background-image: image('/Images/url-shortener.png') */
             margin: 70px;
             padding: 5px;
         }

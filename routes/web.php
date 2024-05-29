@@ -41,6 +41,9 @@ Route::post('/urls/delete/{id}',[urlpageController::class,'destroy'])->name('url
 //view individual urls
 Route::get('/urls/{id}',[ urlpageController::class, 'view'])->name('urls.view');
 
+//to upload file
+Route::get('file-upload',[homepageController::class,'upload_page'])->name('file.upload');
+Route::post('file-upload',[homepageController::class,'upload']);
 });
 
 
