@@ -19,12 +19,12 @@ class homepageController extends Controller
         ]);
         // Assume the image is stored and the path is obtained
 
-        $path = $request->file('file')->store('Images');
+        $path = $request->file('file')->store('public');
         $fullPath = $path;
 
         // Store the full path in session
         session(['path' => $fullPath]);
 
         return redirect()->back()->with('path',$path);
-    }
+    }   
 }

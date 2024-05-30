@@ -6,6 +6,8 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\URL;
 use App\Models\Visitor;
+use App\Http\Requests\CreateUrlRequest;
+use App\Http\Requests\UpdateUrlRequest;
 
 class urlpageController extends Controller
 {
@@ -28,12 +30,12 @@ public function view($id){
 public function create(){
     return view("urls.create");
     }
-public function store(Request $request){
-    $request ->validate(
-        [
-            'url'=> 'url|max:2048'
-        ]
-        );
+public function store(CreateUrlRequest $request){
+    // $request ->validate(
+    //     [
+    //         'url'=> 'url|max:2048'
+    //     ]
+    //     );
 
     $ran_string = Str::random(8);
     // return $ran_string;
@@ -44,29 +46,28 @@ public function store(Request $request){
    ]);
    return redirect()->action([urlpageController::class,'index']);
 }
-public function edit($id){
+public function edit(UpdateUrlRequest $request,$id){
     $url = URL::findOrFail($id);
     //checks if user is accessing its own data or not
-    if($url->user_id != auth()->user()->id){
+   /*  if($url->user_id != auth()->user()->id){
         abort(404);
-    }
-    Log::info($url);
+    } */
   //  dd($url);
     return view('urls.edit',compact('url'));
 }
-public function update(Request $request, $id){
+public function update(UpdateUrlRequest $request, $id){
    // dd($request, $id);
-   $request ->validate([
+/*    $request ->validate([
         'url'=> 'url|max:2048'
     ] );
+ */
+    $url = URL::findOrFail($id);
 
-   $url = URL::findOrFail($id);
-   if($url->user_id != auth()->user()->id){
-    abort(404);
-    }
-   $url->update(
+ /*   $url->update(
    ['original_url'=> $request->url]
-   );
+   ); */
+   $url->original_url =$request->url;
+   $url->save();
    $request->session()-> flash('success','URL was updated successfully');
    return redirect()->action([urlpageController::class,'index']);
 }
