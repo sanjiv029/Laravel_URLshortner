@@ -14,11 +14,16 @@ Route::post('/register', [authController::class, 'register']);
 Route::get('/login', [authController::class, 'login_page'])->name('login');
 // Route for handling login form submission
 Route::post('/login', [authController::class, 'login']);
-Route::post('/logout', [authController::class, 'logout'])->name('logout');
+
 
 Route::get('/',[homepageController::class,'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
+Route::post('/logout', [authController::class, 'logout'])->name('logout');
+
+//for profile
+Route::get('profile', [authController::class, 'profile'])->name('profile');
+Route::post('profile', [authController::class, 'update_profile']);
 //list the urls  protecting route using
 Route::get('/urls',[urlpageController::class,'index'])->name('urls');
 

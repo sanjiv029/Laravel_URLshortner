@@ -12,18 +12,21 @@ use App\Http\Requests\UpdateUrlRequest;
 class urlpageController extends Controller
 {
 public function index(){
+  //  abort('404');
      // Ensure the user is authenticated
         $userID = auth()->user()->id;
          Log::info($userID);
-        $urls= URL::where("user_id", $userID)->get();
-        return view('urls.index', compact('urls'));
+        // $urls= URL::where("user_id", $userID)->get();
+        $urls= URL::where("user_id", $userID)->paginate(5);
+        $count =URL::where("user_id",$userID)->count();
+        return view('urls.index', compact('urls','count'));
 
 }
 
 public function view($id){
     $url = URL::findOrFail($id);
     if($url->user_id != auth()->user()->id){
-        abort(404);
+        abort(403);
     }
     return view("urls.view",compact("url"));
     }
@@ -49,9 +52,9 @@ public function store(CreateUrlRequest $request){
 public function edit(UpdateUrlRequest $request,$id){
     $url = URL::findOrFail($id);
     //checks if user is accessing its own data or not
-   /*  if($url->user_id != auth()->user()->id){
-        abort(404);
-    } */
+    if($url->user_id != auth()->user()->id){
+        abort(403);
+    }
   //  dd($url);
     return view('urls.edit',compact('url'));
 }
@@ -74,7 +77,7 @@ public function update(UpdateUrlRequest $request, $id){
 public function destroy(Request $request ,$id){
     $url = URL::findOrFail($id);
     if($url->user_id != auth()->user()->id){
-        abort(404);
+        abort(401);
     }
     $url->delete();
     $request->session()-> flash('success','URL was deleted successfully');
@@ -98,7 +101,7 @@ public function redirect(Request $request,$short_url){
         $url->increment('visitor_count');
     return redirect()->away($url->original_url);
     }
-    abort(404);
+    abort(401);
 
 }
 }

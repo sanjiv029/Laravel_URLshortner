@@ -56,4 +56,17 @@ public function logout(Request $request){
     auth()->logout();
     return redirect()->route('home')->with('success','Logged Out Successfully');
 }
+public function profile(){
+    return view('profile');
+}
+public function update_profile(Request $request){
+   $request->validate([
+    'name'=> 'required|string|max:255'
+   ]);
+   $user = auth()->user();
+   $user->name = ($request->name);
+   $user->save();
+   return redirect()->back()->with('success','Profile updated Successfully');
+
+}
 }

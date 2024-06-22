@@ -1,6 +1,8 @@
 {{-- @dd(Session::all()) --}}
 @extends('Layouts.App')
 @section('content')
+<link rel="stylesheet" href="https://unpkg.com/tailwindcss@2.2.19/dist/tailwind.min.css" />
+
    {{--  listing urls here --}}
   <h4 style="font-size:1.5rem">Add your urls here.</h4>
    <br>
@@ -19,10 +21,12 @@
 
 <br>
     <br>
+Total Urls: {{ $count }}
     <div>
         <table  style="border: 2px solid rgb(0, 0, 0); border-collapse: collapse; width: 80%; height: 120px;">
             <h2>URL Table</h2>
             <tr>
+                <th style="border: 2px solid black">Index</th>
                 <th style="border: 2px solid black">ID</th>
                 <th style="border: 2px solid black">Original Url</th>
                 <th style="border: 2px solid black">Short Url</th>
@@ -30,6 +34,7 @@
             </tr>
             @forelse ($urls as $url)
             <tr>
+                <td style="border: 2px solid black; text-align:center">{{ $loop->iteration }}</td>
                 <td style="border: 2px solid black; text-align:center">{{ $url->id }}</td>
                 <td style="border: 1px solid black; text-align:center">{{ $url->original_url }}</td>
                 <td style="border: 1px solid black; text-align:center">{{ $url->short_url }}</td>
@@ -47,7 +52,11 @@
                 <td colspan="6" style="text-align: center; border: 1px solid black;">No URLs found</td>
             </tr>
             @endforelse
+
     </table>
+    <div>
+        {{$urls->links('pagination::custom')}}
+    </div>
     </div>
    {{--  @dd(Session::all()) --}}
 @endsection
