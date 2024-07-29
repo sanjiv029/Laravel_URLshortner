@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Mail\UrlCreatedMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -8,7 +9,9 @@ use App\Models\URL;
 use App\Models\Visitor;
 use App\Http\Requests\CreateUrlRequest;
 use App\Http\Requests\UpdateUrlRequest;
-
+use App\Events\UrlCreation;
+use App\Mail\UrlCreatedMarkdownMail;
+use Illuminate\Support\Facades\Mail;
 class urlpageController extends Controller
 {
 public function index(){
@@ -16,7 +19,6 @@ public function index(){
      // Ensure the user is authenticated
         $userID = auth()->user()->id;
          Log::info($userID);
-        // $urls= URL::where("user_id", $userID)->get();
         $urls= URL::where("user_id", $userID)->paginate(5);
         $count =URL::where("user_id",$userID)->count();
         return view('urls.index', compact('urls','count'));
@@ -34,19 +36,18 @@ public function create(){
     return view("urls.create");
     }
 public function store(CreateUrlRequest $request){
-    // $request ->validate(
-    //     [
-    //         'url'=> 'url|max:2048'
-    //     ]
-    //     );
-
     $ran_string = Str::random(8);
-    // return $ran_string;
-   URL::create([
-    'user_id'=> auth()->user()->id,
+
+   $url=URL::create([
     'original_url'=> $request->url,
     'short_url'=> $ran_string
    ]);
+   $user = auth()->user();
+
+  // Mail::to($user)->send(new UrlCreatedMail($url));
+  Mail::to($user)->send(new UrlCreatedMarkdownMail($url));
+
+  UrlCreation::dispatch($url);  //event dispatched
    return redirect()->action([urlpageController::class,'index']);
 }
 public function edit(UpdateUrlRequest $request,$id){
@@ -59,16 +60,8 @@ public function edit(UpdateUrlRequest $request,$id){
     return view('urls.edit',compact('url'));
 }
 public function update(UpdateUrlRequest $request, $id){
-   // dd($request, $id);
-/*    $request ->validate([
-        'url'=> 'url|max:2048'
-    ] );
- */
-    $url = URL::findOrFail($id);
 
- /*   $url->update(
-   ['original_url'=> $request->url]
-   ); */
+    $url = URL::findOrFail($id);
    $url->original_url =$request->url;
    $url->save();
    $request->session()-> flash('success','URL was updated successfully');
@@ -79,6 +72,8 @@ public function destroy(Request $request ,$id){
     if($url->user_id != auth()->user()->id){
         abort(401);
     }
+     // Delete all visitors that reference this URL
+     Visitor::where('url_id', $id)->delete();
     $url->delete();
     $request->session()-> flash('success','URL was deleted successfully');
     return redirect()->action([urlpageController::class,'index']);
@@ -87,8 +82,6 @@ public function destroy(Request $request ,$id){
 
 public function redirect(Request $request,$short_url){
     $url = URL::where('short_url',$short_url)->first();
-
-   // dd($request->userAgent()) ;
 
    if($url){
     //record ip and user agent
