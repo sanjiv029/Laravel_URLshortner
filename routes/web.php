@@ -15,7 +15,6 @@ Route::get('/login', [authController::class, 'login_page'])->name('login');
 // Route for handling login form submission
 Route::post('/login', [authController::class, 'login']);
 
-
 Route::get('/',[homepageController::class,'index'])->name('home');
 
 Route::middleware(['auth'])->group(function () {
@@ -46,11 +45,12 @@ Route::post('/urls/delete/{id}',[urlpageController::class,'destroy'])->name('url
 //view individual urls
 Route::get('/urls/{id}',[ urlpageController::class, 'view'])->name('urls.view');
 
-//to upload file
-Route::get('file-upload',[homepageController::class,'upload_page'])->name('file.upload');
-Route::post('file-upload',[homepageController::class,'upload']);
+//route for short url
+Route::get('/{short_url}',[urlpageController::class,'redirect']);
 });
 
 
-//route for short url
-Route::get('/{short_url}',[urlpageController::class,'redirect']);
+
+/* //to upload file
+Route::get('file-upload',[homepageController::class,'upload_page'])->name('file.upload');
+Route::post('file-upload',[homepageController::class,'upload']); */

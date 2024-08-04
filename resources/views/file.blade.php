@@ -1,4 +1,4 @@
-@extends('Layouts.App')
+{{-- @extends('Layouts.App')
 @section('content')
     <h1 style="text-align: center;">Upload your file</h1>
 
@@ -23,4 +23,4 @@
         <img src="{{Storage::url(Session::get('path')) }}" alt="Uploaded Image">
     </div>
     @endif
-@endsection
+@endsection --}}

@@ -10,7 +10,12 @@ class homepageController extends Controller
         return view("welcome");
 
     }
-    public function upload_page(){
+}
+
+
+
+
+  /*   public function upload_page(){
         return view('file');
     }
     public function upload(Request $request) {
@@ -26,5 +31,5 @@ class homepageController extends Controller
         session(['path' => $fullPath]);
 
         return redirect()->back()->with('path',$path);
-    }   
-}
+    }
+ */
