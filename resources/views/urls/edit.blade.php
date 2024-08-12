@@ -12,6 +12,6 @@
         <br>
         <br>
         <button type="submit" class="button">Submit</button>
-         <a href="{{ route('urls') }}" class="button">Back</a>
+         <a href="{{ route('urls') }}" class="button1">Back</a>
     </form>
 @endsection

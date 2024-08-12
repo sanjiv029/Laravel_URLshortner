@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\UrlCreatedMail;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
@@ -11,6 +10,7 @@ use App\Models\Visitor;
 use App\Http\Requests\CreateUrlRequest;
 use App\Http\Requests\UpdateUrlRequest;
 use App\Events\UrlCreation;
+use App\Jobs\SendUrlCreated;
 use App\Mail\UrlCreatedMarkdownMail;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Cache;
@@ -24,7 +24,7 @@ class urlpageController extends Controller
         Log::info($user_id);
 
         // Cache the URLs
-        $urls = Cache::remember('urls', 5, function() use ($user_id) {
+        $urls = Cache::remember('urls', 2, function() use ($user_id) {
             return URL::where('user_id', $user_id)->paginate(5);
         });
 
@@ -58,7 +58,8 @@ class urlpageController extends Controller
 
         $user = auth()->user();
 
-        Mail::to($user)->send(new UrlCreatedMarkdownMail($url));
+        /* Mail::to($user)->send(new UrlCreatedMarkdownMail($url)); */
+        SendUrlCreated::dispatch($user,$url);
         UrlCreation::dispatch($url);  // Event dispatched
 
         Cache::forget('urls'); // Clear the cache when a new URL is created

@@ -18,6 +18,8 @@
             <span style="color:red"> {{$message}} </span>
         @enderror
         </div>
+        <a href="{{route('password.request')}}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Forget Your Password</a>
+        <br><br>
         <button type="submit" class="btn btn-primary">Log In</button>
     </form>
 </div>

@@ -49,6 +49,7 @@ public function login(Request $request){
    {
     return redirect()->route('home')->with('success', 'Login successful!');
    }
+   return "email or password incorrect";
 
 //    $this->login($request);
 }

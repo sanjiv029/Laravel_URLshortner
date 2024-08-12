@@ -33,7 +33,7 @@
         </table>
     </div>
     <footer style="margin-top: 50px">
-        <a href="{{ route('urls') }}" class="button">Back</a>
+        <a href="{{ route('urls') }}" class="button1">Back</a>
     </footer>
 
 @endsection

@@ -53,7 +53,20 @@
             text-decoration: none;
         }
         .button:hover {
-            background-color: #0cfd08;
+            background-color: #49f30b;
+        }
+        .button1 {
+            display: inline-block;
+            padding: 6px 12px;
+            font-size: 14px;
+            color: rgb(0, 0, 0);
+            background-color: #ffffff;
+            border: none;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button1:hover {
+            background-color: #a62204;
         }
         .delete {
             display: inline-block;

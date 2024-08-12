@@ -12,7 +12,8 @@
         @enderror
         <br>
         <br>
-        <button type="submit">Submit</button>
+        <button type="submit" class="button">Submit</button>
+        <a href="{{ route('urls') }}" class="button1">Back</a>
     </form>
 
 @endsection
